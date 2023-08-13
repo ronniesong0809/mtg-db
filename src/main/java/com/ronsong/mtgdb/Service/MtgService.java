@@ -19,8 +19,17 @@ public class MtgService {
     @Autowired
     CardsRepository repository;
 
+    public List<CardResponse> getAllCards() {
+        List<Card> allCards = repository.findAll();
+        return mappingCards(allCards);
+    }
+
     public List<CardResponse> getCardByName(String name) {
         List<Card> allByName = repository.findAllByName(name);
+        return mappingCards(allByName);
+    }
+
+    private static List<CardResponse> mappingCards(List<Card> allByName) {
         log.info("{}", allByName);
 
         List<CardResponse> cardResponses = new ArrayList<>();

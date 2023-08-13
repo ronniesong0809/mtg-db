@@ -19,6 +19,12 @@ public class MgtController {
     @Autowired
     private MtgService service;
 
+    @GetMapping(value = "/all")
+    public ResponseEntity<List<CardResponse>> getAllCards() {
+        log.info("GET /all");
+        return new ResponseEntity<>(service.getAllCards(), HttpStatus.OK);
+    }
+
     @GetMapping(value = "/card")
     public ResponseEntity<List<CardResponse>> getCardByName(@RequestParam("name") String name) {
         log.info("GET /card, name: {}", name);
