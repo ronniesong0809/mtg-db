@@ -6,6 +6,9 @@ import com.ronsong.mtgdb.repository.CardsRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -19,9 +22,11 @@ public class MtgService {
     @Autowired
     CardsRepository repository;
 
-    public List<CardResponse> getAllCards() {
-        List<Card> allCards = repository.findAll();
-        return mappingCards(allCards);
+    public Page<Card> getAllCards(int page) {
+        Pageable pageable = PageRequest.of(page, 25);
+        Page<Card> allCards = repository.findAll(pageable);
+        // return mappingCards(allCards);
+        return allCards;
     }
 
     public List<CardResponse> getCardByName(String name) {
