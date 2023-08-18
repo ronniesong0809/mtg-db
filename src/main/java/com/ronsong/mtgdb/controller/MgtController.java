@@ -1,8 +1,7 @@
 package com.ronsong.mtgdb.controller;
 
 import com.ronsong.mtgdb.Service.MtgService;
-import com.ronsong.mtgdb.model.CardResponse;
-import com.ronsong.mtgdb.model.dto.Card;
+import com.ronsong.mtgdb.model.Card;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,14 +23,16 @@ public class MgtController {
     @GetMapping(value = "/all")
     public ResponseEntity<Page<Card>> getAllCards(@RequestParam(value = "page", defaultValue = "1") int page) {
         log.info("GET /all");
+
         Page<Card> allCards = service.getAllCards(page);
         return new ResponseEntity<>(allCards, HttpStatus.OK);
     }
 
     @GetMapping(value = "/card")
-    public ResponseEntity<List<CardResponse>> getCardByName(@RequestParam("name") String name) {
+    public ResponseEntity<List<Card>> getCardByName(@RequestParam("name") String name) {
         log.info("GET /card, name: {}", name);
-        List<CardResponse> cardByName = service.getCardByName(name);
+
+        List<Card> cardByName = service.getCardByName(name);
         return new ResponseEntity<>(cardByName, HttpStatus.OK);
     }
 }

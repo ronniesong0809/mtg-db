@@ -7,12 +7,14 @@ import java.util.List;
 
 @Data
 @Builder
-public class CardResponse {
+public class Card {
     private String id;
+    private String oracle_id;
     private String name;
     private List<String> colors;
-    private String oracle_text;
     private List<String> type;
     private List<String> subtype;
-    private String uri;
+    private String released_at;
+    private String lang;
+    private List<Card> alternatives;
 }
