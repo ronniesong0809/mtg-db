@@ -13,7 +13,4 @@ import java.util.List;
 public interface CardsRepository extends MongoRepository<Card, String> {
     Page<Card> findAll(Pageable pageable);
     List<Card> findAllByName(String name);
-
-    @Query
-    List<Card> findByQuery(String name);
 }
