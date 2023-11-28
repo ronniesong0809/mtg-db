@@ -2,6 +2,8 @@ package com.ronsong.mtgdb.controller;
 
 import com.ronsong.mtgdb.Service.MtgService;
 import com.ronsong.mtgdb.model.Card;
+import com.ronsong.mtgdb.model.stats.Stats;
+import com.ronsong.mtgdb.model.dto.CardDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,5 +36,13 @@ public class MgtController {
 
         List<Card> cardByName = service.getCardByName(name);
         return new ResponseEntity<>(cardByName, HttpStatus.OK);
+    }
+
+    @PostMapping(value = "/deck")
+    public ResponseEntity<Stats> getCardsByDeck(@RequestBody List<CardDto> cardDto) {
+        log.info("POST /deck, size: {}", cardDto.size());
+
+        Stats stats = service.getCardsByDeck(cardDto);
+        return new ResponseEntity<>(stats, HttpStatus.OK);
     }
 }
