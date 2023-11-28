@@ -17,8 +17,8 @@ public class CardResponse {
     private String oracle_text;
     private String mana_cost;
     private int mana_total;
-    private String power;
-    private String toughness;
+    private int power;
+    private int toughness;
     private String released_at;
     private String lang;
     private List<CardResponse> alternatives;

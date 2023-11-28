@@ -10,7 +10,9 @@ import java.util.ArrayList;
 @RequiredArgsConstructor
 public class Creature implements Type {
     private int total;
-    private float average;
+    private float averagePower;
+    private float averageToughness;
+    private float averageMana;
     private ArrayList<String> names;
 
     @Override

@@ -65,8 +65,16 @@ public class MtgService {
                 .oracle_text(card.getOracle_text())
                 .mana_cost(card.getMana_cost())
                 .mana_total(getMana(card.getMana_cost()))
-                .power(card.getPower())
-                .toughness(card.getToughness())
+                .power("*".equals(card.getPower())
+                        ? 0
+                        : Integer.parseInt(Optional.ofNullable(card.getPower())
+                        .orElse("0"))
+                )
+                .toughness("*".equals(card.getToughness())
+                        ? 0
+                        : Integer.parseInt(Optional.ofNullable(card.getToughness())
+                        .orElse("0"))
+                )
                 .released_at(card.getReleased_at())
                 .lang(card.getLang())
                 .alternatives(null)
@@ -98,8 +106,9 @@ public class MtgService {
             } else {
                 type.getNames().add(dto.getName());
             }
-
-            type.setAverage((type.getAverage() * (type.getNames().size() - 1) + mana) / type.getNames().size());
+            type.setAveragePower((type.getAveragePower() * (type.getNames().size() - 1) + card.getPower()) / type.getNames().size());
+            type.setAverageToughness((type.getAverageToughness() * (type.getNames().size() - 1) + card.getToughness()) / type.getNames().size());
+            type.setAverageMana((type.getAverageMana() * (type.getNames().size() - 1) + mana) / type.getNames().size());
             type.setTotal(type.getTotal() + mana);
             stats.getTypes().put(type.getClassNames(), type);
         });
